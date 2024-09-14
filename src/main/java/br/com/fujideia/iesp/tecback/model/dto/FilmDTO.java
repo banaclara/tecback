@@ -9,12 +9,11 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FilmeDTO {
+public class FilmDTO {
     private Long id;
-    private String titulo;
-    private int anoLancamento;
-    private DiretorDTO diretor;
-    private List<AtorDTO> atores;
-    private List<GeneroDTO> generos;
+    private String title;
+    private int releaseYear;
+    private DirectorDTO director;
+    private List<ActorDTO> actors;
+    private List<GenreDTO> genres;
 }
-

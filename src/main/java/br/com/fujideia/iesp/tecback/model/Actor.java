@@ -9,15 +9,14 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-public class Ator {
+public class Actor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    private String name;
 
-    @ManyToMany(mappedBy = "atores")
-    private List<Filme> filmes;
+    @ManyToMany(mappedBy = "actors")
+    private List<Film> films;
 }
-

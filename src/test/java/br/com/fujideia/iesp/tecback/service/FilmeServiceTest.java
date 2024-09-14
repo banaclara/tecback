@@ -1,12 +1,6 @@
 package br.com.fujideia.iesp.tecback.service;
 
 
-import br.com.fujideia.iesp.tecback.model.Filme;
-import br.com.fujideia.iesp.tecback.model.Diretor;
-import br.com.fujideia.iesp.tecback.model.Ator;
-import br.com.fujideia.iesp.tecback.model.Genero;
-import br.com.fujideia.iesp.tecback.model.dto.FilmeDTO;
-import br.com.fujideia.iesp.tecback.repository.FilmeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

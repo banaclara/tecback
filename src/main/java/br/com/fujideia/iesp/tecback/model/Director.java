@@ -6,19 +6,17 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-
+@Entity
 @Data
 @NoArgsConstructor
-@Entity
-public class Genero {
+public class Director {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    private String name;
 
-    @ManyToMany(mappedBy = "generos")
-    private List<Filme> filmes;
+    @OneToMany(mappedBy = "director")
+    private List<Film> filmsDirected;
 }
-
