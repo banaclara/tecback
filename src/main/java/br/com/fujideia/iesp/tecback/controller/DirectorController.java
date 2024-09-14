@@ -1,9 +1,6 @@
 package br.com.fujideia.iesp.tecback.controller;
 
-import br.com.fujideia.iesp.tecback.model.Director;
 import br.com.fujideia.iesp.tecback.model.dto.DirectorDTO;
-import br.com.fujideia.iesp.tecback.model.dto.FilmDTO;
-import br.com.fujideia.iesp.tecback.repository.DirectorRepository;
 import br.com.fujideia.iesp.tecback.service.DirectorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

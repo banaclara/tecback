@@ -1,6 +1,5 @@
 package br.com.fujideia.iesp.tecback.service;
 
-import br.com.fujideia.iesp.tecback.model.Film;
 import br.com.fujideia.iesp.tecback.model.Genre;
 import br.com.fujideia.iesp.tecback.model.dto.GenreDTO;
 import br.com.fujideia.iesp.tecback.repository.GenreRepository;

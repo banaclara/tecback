@@ -1,9 +1,6 @@
 package br.com.fujideia.iesp.tecback.controller;
 
-import br.com.fujideia.iesp.tecback.model.Actor;
-import br.com.fujideia.iesp.tecback.model.Film;
 import br.com.fujideia.iesp.tecback.model.dto.ActorDTO;
-import br.com.fujideia.iesp.tecback.repository.ActorRepository;
 import br.com.fujideia.iesp.tecback.service.ActorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +17,13 @@ import java.util.Optional;
 public class ActorController {
 
     private final ActorService actorService;
+
+    @GetMapping
+    public ResponseEntity<List<ActorDTO>> listAll() {
+        log.info("listAll on ActorController");
+        List<ActorDTO> actors = actorService.listActors();
+        return ResponseEntity.ok(actors);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ActorDTO> searchById(@PathVariable Long id) {

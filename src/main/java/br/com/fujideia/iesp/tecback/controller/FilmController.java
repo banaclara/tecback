@@ -1,6 +1,5 @@
 package br.com.fujideia.iesp.tecback.controller;
 
-import br.com.fujideia.iesp.tecback.model.Film;
 import br.com.fujideia.iesp.tecback.model.dto.FilmDTO;
 import br.com.fujideia.iesp.tecback.service.FilmService;
 import lombok.RequiredArgsConstructor;

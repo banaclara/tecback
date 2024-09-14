@@ -22,7 +22,6 @@ public class ActorService {
                 .collect(Collectors.toList());
     }
 
-    // Buscar um ator por ID
     public Optional<ActorDTO> searchById(Long id) {
         return actorRepository.findById(id)
                 .map(Converter::convertToDTO);
