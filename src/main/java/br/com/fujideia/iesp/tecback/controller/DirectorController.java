@@ -1,9 +1,12 @@
 package br.com.fujideia.iesp.tecback.controller;
 
-
 import br.com.fujideia.iesp.tecback.model.Director;
+import br.com.fujideia.iesp.tecback.model.dto.DirectorDTO;
+import br.com.fujideia.iesp.tecback.model.dto.FilmDTO;
 import br.com.fujideia.iesp.tecback.repository.DirectorRepository;
+import br.com.fujideia.iesp.tecback.service.DirectorService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,44 +16,46 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/directors")
+@Slf4j
 public class DirectorController {
 
-    private final DirectorRepository directorRepository;
+    private final DirectorService directorService;
 
     @GetMapping
-    public List<Director> listAll() {
-        return directorRepository.findAll();
+    public ResponseEntity<List<DirectorDTO>> listAll() {
+        log.info("listAll on DirectorController");
+        List<DirectorDTO> directors = directorService.listDirectors();
+        return ResponseEntity.ok(directors);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Director> searchById(@PathVariable Long id) {
-        Optional<Director> director = directorRepository.findById(id);
-        return director.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<DirectorDTO> searchById(@PathVariable Long id) {
+        log.info("Calling searchById on DirectorController with id: {}", id);
+        Optional<DirectorDTO> director = directorService.searchById(id);
+        return director.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Director createDirector(@RequestBody Director director) {
-        return directorRepository.save(director);
+    public ResponseEntity<DirectorDTO> createDirector(@RequestBody DirectorDTO directorDTO) {
+        log.info("Calling createDirector on DirectorController with data: {}", directorDTO);
+        DirectorDTO createdDirector = directorService.createDirector(directorDTO);
+        return ResponseEntity.ok(createdDirector);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Director> updateDirector(@PathVariable Long id, @RequestBody Director directorDetails) {
-        Optional<Director> directorOptional = directorRepository.findById(id);
-        if (directorOptional.isPresent()) {
-            Director director = directorOptional.get();
-            director.setName(directorDetails.getName());
-            director.setFilmsDirected(directorDetails.getFilmsDirected());
-            Director directorUpdated = directorRepository.save(director);
-            return ResponseEntity.ok(directorUpdated);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<DirectorDTO> updateDirector(@PathVariable Long id, @RequestBody DirectorDTO directorDetails) {
+        log.info("Calling updateDirector on DirectorController with id: {} and data: {}", id, directorDetails);
+        Optional<DirectorDTO> updatedDirector = directorService.updateDirector(id, directorDetails);
+        return updatedDirector.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeDirector(@PathVariable Long id) {
-        if (directorRepository.existsById(id)) {
-            directorRepository.deleteById(id);
+        log.info("Calling deleteDirector on DirectorController with id: {}", id);
+        boolean deleted = directorService.deleteDirector(id);
+        if (deleted) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();

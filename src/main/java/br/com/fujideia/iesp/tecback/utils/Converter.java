@@ -18,15 +18,43 @@ public class Converter {
                 film.getId(),
                 film.getTitle(),
                 film.getReleaseYear(),
-                film.getDirector() != null ? new DirectorDTO(film.getDirector().getId(), film.getDirector().getName()) : null,
-                film.getActors()
-                        .stream()
-                        .map(actor -> new ActorDTO(actor.getId(), actor.getName()))
+                film.getDirector() != null ? convertToDTO(film.getDirector()) : null,
+                film.getActors().stream()
+                        .map(Converter::convertToDTO)
                         .collect(Collectors.toList()),
-                film.getGenres()
-                        .stream()
-                        .map(genre -> new GenreDTO(genre.getId(), genre.getName()))
+                film.getGenres().stream()
+                        .map(Converter::convertToDTO)
                         .collect(Collectors.toList())
+        );
+    }
+
+    public static DirectorDTO convertToDTO(Director director) {
+        return new DirectorDTO(
+                director.getId(),
+                director.getName(),
+                director.getFilmsDirected() != null ? director.getFilmsDirected().stream()
+                        .map(Converter::convertToDTO)
+                        .collect(Collectors.toList()) : null
+        );
+    }
+
+    public static GenreDTO convertToDTO(Genre genre) {
+        return new GenreDTO(
+                genre.getId(),
+                genre.getName(),
+                genre.getFilms() != null ? genre.getFilms().stream()
+                        .map(Converter::convertToDTO)
+                        .collect(Collectors.toList()) : null
+        );
+    }
+
+    public static ActorDTO convertToDTO(Actor actor) {
+        return new ActorDTO(
+                actor.getId(),
+                actor.getName(),
+                actor.getFilms() != null ? actor.getFilms().stream()
+                        .map(Converter::convertToDTO)
+                        .collect(Collectors.toList()) : null
         );
     }
 
