@@ -1,12 +1,16 @@
 package br.com.fujideia.iesp.tecback.service;
 
+import br.com.fujideia.iesp.tecback.model.Film;
 import br.com.fujideia.iesp.tecback.model.Genre;
+import br.com.fujideia.iesp.tecback.model.dto.GenreDTO;
 import br.com.fujideia.iesp.tecback.repository.GenreRepository;
+import br.com.fujideia.iesp.tecback.utils.Converter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -14,36 +18,35 @@ public class GenreService {
 
     private final GenreRepository genreRepository;
 
-    public List<Genre> listGenres() {
-        return genreRepository.findAll();
+    public List<GenreDTO> listGenres() {
+        return genreRepository.findAll().stream()
+                .map(Converter::convertToDTO)
+                .collect(Collectors.toList());
     }
 
-    public Genre searchById(Long id) {
-        var genre = genreRepository.findById(id);
-        if (genre.isEmpty()) {
-            throw new RuntimeException("Genre not found");
-        }
-        return genre.get();
+    public Optional<GenreDTO> searchById(Long id) {
+        return genreRepository.findById(id)
+                .map(Converter::convertToDTO);
     }
 
-    public Genre createGenre(Genre genre) {
-        return genreRepository.save(genre);
+    public GenreDTO createGenre(GenreDTO genreDTO) {
+        Genre genre = Converter.convertToEntity(genreDTO);
+        return Converter.convertToDTO(genreRepository.save(genre));
     }
 
-    public Genre updateGenre(Long id, Genre genre) {
-        Optional<Genre> genreOptional = genreRepository.findById(id);
-        if (genreOptional.isEmpty()) {
-            throw new RuntimeException("Genre not found");
-        }
-        genre.setId(id);
-        return genreRepository.save(genre);
+    public Optional<GenreDTO> updateGenre(Long id, GenreDTO genreDTO) {
+        return genreRepository.findById(id).map(genre -> {
+            genre.setName(genreDTO.getName());
+            genre.setFilms(genreDTO.getFilms().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
+            return Converter.convertToDTO(genreRepository.save(genre));
+        });
     }
 
-    public void deleteGenre(Long id) {
+    public boolean deleteGenre(Long id) {
         if (genreRepository.existsById(id)) {
             genreRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("Genre not found");
+            return true;
         }
+        return false;
     }
 }
