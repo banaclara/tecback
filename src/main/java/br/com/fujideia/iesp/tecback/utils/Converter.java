@@ -1,13 +1,7 @@
 package br.com.fujideia.iesp.tecback.utils;
 
-import br.com.fujideia.iesp.tecback.model.Actor;
-import br.com.fujideia.iesp.tecback.model.Director;
-import br.com.fujideia.iesp.tecback.model.Film;
-import br.com.fujideia.iesp.tecback.model.Genre;
-import br.com.fujideia.iesp.tecback.model.dto.ActorDTO;
-import br.com.fujideia.iesp.tecback.model.dto.DirectorDTO;
-import br.com.fujideia.iesp.tecback.model.dto.FilmDTO;
-import br.com.fujideia.iesp.tecback.model.dto.GenreDTO;
+import br.com.fujideia.iesp.tecback.model.*;
+import br.com.fujideia.iesp.tecback.model.dto.*;
 
 import java.util.stream.Collectors;
 
@@ -23,6 +17,9 @@ public class Converter {
                         .map(Converter::convertToDTO)
                         .collect(Collectors.toList()),
                 film.getGenres().stream()
+                        .map(Converter::convertToDTO)
+                        .collect(Collectors.toList()),
+                film.getProducers().stream()
                         .map(Converter::convertToDTO)
                         .collect(Collectors.toList())
         );
@@ -58,6 +55,18 @@ public class Converter {
         );
     }
 
+    public static ProducerDTO convertToDTO(Producer producer) {
+        return new ProducerDTO(
+                producer.getId(),
+                producer.getName(),
+                producer.getAge(),
+                producer.getNationality(),
+                producer.getProducedFilms() != null ? producer.getProducedFilms().stream()
+                        .map(Converter::convertToDTO)
+                        .collect(Collectors.toList()) : null
+        );
+    }
+
     public static Film convertToEntity(FilmDTO filmDTO) {
         Film film = new Film();
         film.setTitle(filmDTO.getTitle());
@@ -65,6 +74,7 @@ public class Converter {
         film.setDirector(convertToEntity(filmDTO.getDirector()));
         film.setActors(filmDTO.getActors().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
         film.setGenres(filmDTO.getGenres().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
+        film.setProducers(filmDTO.getProducers().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
         return film;
     }
 
@@ -90,5 +100,14 @@ public class Converter {
         genre.setId(genreDTO.getId());
         genre.setName(genreDTO.getName());
         return genre;
+    }
+
+    public static Producer convertToEntity(ProducerDTO producerDTO) {
+        Producer producer = new Producer();
+        producer.setId(producerDTO.getId());
+        producer.setName(producerDTO.getName());
+        producer.setAge(producerDTO.getAge());
+        producer.setNationality(producerDTO.getNationality());
+        return producer;
     }
 }

@@ -37,4 +37,12 @@ public class Film {
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
     private List<Genre> genres;
+
+    @ManyToMany
+    @JoinTable(
+            name = "film_producer",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "producer_id")
+    )
+    private List<Producer> producers;
 }

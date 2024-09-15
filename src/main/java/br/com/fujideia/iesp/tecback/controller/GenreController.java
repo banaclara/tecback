@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/genre")
+@RequestMapping("/genres")
 @Slf4j
 public class GenreController {
 
