@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class TrackDTO {
     private Long id;
     private String title;
-    private int duration;
+    private Integer duration;
 }

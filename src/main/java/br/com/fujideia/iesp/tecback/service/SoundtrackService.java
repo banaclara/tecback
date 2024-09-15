@@ -11,6 +11,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,7 +34,12 @@ public class SoundtrackService {
         track.setDuration(trackDTO.getDuration());
         track.setSoundtrack(soundtrack);
 
+        if (soundtrack.getTracks() == null) {
+            soundtrack.setTracks(new ArrayList<>());
+        }
+
         soundtrack.getTracks().add(track);
+        trackRepository.save(track);
         soundtrackRepository.save(soundtrack);
     }
 

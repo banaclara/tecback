@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class Soundtrack {
     private String composer;
 
     @OneToMany(mappedBy = "soundtrack")
-    private List<Track> tracks;
+    private List<Track> tracks = new ArrayList<>();
 
     @OneToOne(mappedBy = "soundtrack")
     private Film film;

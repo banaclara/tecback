@@ -12,7 +12,7 @@ import java.util.List;
 public class FilmDTO {
     private Long id;
     private String title;
-    private int releaseYear;
+    private Integer releaseYear;
     private DirectorDTO director;
     private List<ActorDTO> actors;
     private List<GenreDTO> genres;

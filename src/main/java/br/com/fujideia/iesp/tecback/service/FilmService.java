@@ -35,13 +35,13 @@ public class FilmService {
 
     public Optional<FilmDTO> updateFilm(Long id, FilmDTO filmDTO) {
         return filmRepository.findById(id).map(film -> {
-            film.setTitle(filmDTO.getTitle());
-            film.setReleaseYear(filmDTO.getReleaseYear());
-            film.setDirector(Converter.convertToEntity(filmDTO.getDirector()));
-            film.setActors(filmDTO.getActors().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
-            film.setGenres(filmDTO.getGenres().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
-            film.setProducers(filmDTO.getProducers().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
-            film.setSoundtrack(Converter.convertToEntity(filmDTO.getSoundtrack()));
+            if (filmDTO.getTitle() != null) { film.setTitle(filmDTO.getTitle()); }
+            if (filmDTO.getReleaseYear() != null) { film.setReleaseYear(filmDTO.getReleaseYear()); }
+            if (filmDTO.getDirector() != null) { film.setDirector(Converter.convertToEntity(filmDTO.getDirector())); }
+            if (filmDTO.getActors() != null) { film.setActors(filmDTO.getActors().stream().map(Converter::convertToEntity).collect(Collectors.toList())); }
+            if (filmDTO.getGenres() != null) { film.setGenres(filmDTO.getGenres().stream().map(Converter::convertToEntity).collect(Collectors.toList())); }
+            if (filmDTO.getProducers() != null) { film.setProducers(filmDTO.getProducers().stream().map(Converter::convertToEntity).collect(Collectors.toList())); }
+            if (filmDTO.getSoundtrack() != null) { film.setSoundtrack(Converter.convertToEntity(filmDTO.getSoundtrack())); }
             return Converter.convertToDTO(filmRepository.save(film));
         });
     }

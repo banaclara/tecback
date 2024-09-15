@@ -3,6 +3,7 @@ package br.com.fujideia.iesp.tecback.utils;
 import br.com.fujideia.iesp.tecback.model.*;
 import br.com.fujideia.iesp.tecback.model.dto.*;
 
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Converter {
@@ -123,7 +124,13 @@ public class Converter {
         Soundtrack soundtrack = new Soundtrack();
         soundtrack.setId(soundtrackDTO.getId());
         soundtrack.setComposer(soundtrackDTO.getComposer());
-        soundtrack.setTracks(soundtrackDTO.getTracks().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
+        if (soundtrackDTO.getTracks() != null) {
+            soundtrack.setTracks(soundtrackDTO.getTracks().stream()
+                    .map(Converter::convertToEntity)
+                    .collect(Collectors.toList()));
+        } else {
+            soundtrack.setTracks(new ArrayList<>());
+        }
         return soundtrack;
     }
 

@@ -42,12 +42,14 @@ public class SoundtrackController {
 
     @GetMapping("/search")
     public ResponseEntity<List<SoundtrackDTO>> findSoundtrackByComposer(@RequestParam String composer) {
+        log.info("Calling findSoundtrackByComposer on SoundtrackController with search param: {}", composer);
         List<SoundtrackDTO> soundtracks = soundtrackService.findSoundtrackByComposer(composer);
         return ResponseEntity.ok(soundtracks);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<SoundtrackDTO> updateSoundtrack(@PathVariable Long id, @RequestBody SoundtrackDTO soundtrackDTO) {
+        log.info("Calling updateSoundtrack on SoundtrackController with id: {} and data: {}", id, soundtrackDTO);
         Optional<SoundtrackDTO> updatedSoundtrack = soundtrackService.updateSoundtrack(id, soundtrackDTO);
         return updatedSoundtrack.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -55,7 +57,7 @@ public class SoundtrackController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSoundtrack(@PathVariable Long id) {
-        log.info("Calling deleteFilm on FilmController with id: {}", id);
+        log.info("Calling deleteSoundtrack on SoundtrackController with id: {}", id);
         boolean deleted = soundtrackService.deleteSoundtrack(id);
         if (deleted) {
             return ResponseEntity.noContent().build();

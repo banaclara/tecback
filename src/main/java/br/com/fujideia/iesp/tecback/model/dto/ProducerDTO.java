@@ -12,6 +12,6 @@ import java.util.List;
 public class ProducerDTO {
     private Long id;
     private String name;
-    private int age;
+    private Integer age;
     private String nationality;
 }
