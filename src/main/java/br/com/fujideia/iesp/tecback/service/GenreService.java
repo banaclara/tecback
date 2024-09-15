@@ -36,7 +36,6 @@ public class GenreService {
     public Optional<GenreDTO> updateGenre(Long id, GenreDTO genreDTO) {
         return genreRepository.findById(id).map(genre -> {
             genre.setName(genreDTO.getName());
-            genre.setFilms(genreDTO.getFilms().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
             return Converter.convertToDTO(genreRepository.save(genre));
         });
     }

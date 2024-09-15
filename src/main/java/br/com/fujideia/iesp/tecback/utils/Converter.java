@@ -29,30 +29,21 @@ public class Converter {
     public static DirectorDTO convertToDTO(Director director) {
         return new DirectorDTO(
                 director.getId(),
-                director.getName(),
-                director.getFilmsDirected() != null ? director.getFilmsDirected().stream()
-                        .map(Converter::convertToDTO)
-                        .collect(Collectors.toList()) : null
+                director.getName()
         );
     }
 
     public static GenreDTO convertToDTO(Genre genre) {
         return new GenreDTO(
                 genre.getId(),
-                genre.getName(),
-                genre.getFilms() != null ? genre.getFilms().stream()
-                        .map(Converter::convertToDTO)
-                        .collect(Collectors.toList()) : null
+                genre.getName()
         );
     }
 
     public static ActorDTO convertToDTO(Actor actor) {
         return new ActorDTO(
                 actor.getId(),
-                actor.getName(),
-                actor.getFilms() != null ? actor.getFilms().stream()
-                        .map(Converter::convertToDTO)
-                        .collect(Collectors.toList()) : null
+                actor.getName()
         );
     }
 
@@ -61,10 +52,7 @@ public class Converter {
                 producer.getId(),
                 producer.getName(),
                 producer.getAge(),
-                producer.getNationality(),
-                producer.getProducedFilms() != null ? producer.getProducedFilms().stream()
-                        .map(Converter::convertToDTO)
-                        .collect(Collectors.toList()) : null
+                producer.getNationality()
         );
     }
 
@@ -75,7 +63,6 @@ public class Converter {
                 soundtrack.getTracks() != null ? soundtrack.getTracks().stream()
                         .map(Converter::convertToDTO)
                         .collect(Collectors.toList()) : null,
-                soundtrack.getFilm() != null ? convertToDTO(soundtrack.getFilm()) : null,
                 soundtrack.totalDuration()
         );
     }
@@ -84,8 +71,7 @@ public class Converter {
         return new TrackDTO(
                 track.getId(),
                 track.getTitle(),
-                track.getDuration(),
-                track.getSoundtrack() != null ? convertToDTO(track.getSoundtrack()) : null
+                track.getDuration()
         );
     }
 
@@ -138,7 +124,6 @@ public class Converter {
         soundtrack.setId(soundtrackDTO.getId());
         soundtrack.setComposer(soundtrackDTO.getComposer());
         soundtrack.setTracks(soundtrackDTO.getTracks().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
-        soundtrack.setFilm(convertToEntity(soundtrackDTO.getFilm()));
         return soundtrack;
     }
 
@@ -147,7 +132,6 @@ public class Converter {
         track.setId(trackDTO.getId());
         track.setTitle(trackDTO.getTitle());
         track.setDuration(trackDTO.getDuration());
-        track.setSoundtrack(convertToEntity(trackDTO.getSoundtrack()));
         return track;
     }
 }

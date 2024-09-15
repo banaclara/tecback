@@ -40,6 +40,8 @@ public class FilmService {
             film.setDirector(Converter.convertToEntity(filmDTO.getDirector()));
             film.setActors(filmDTO.getActors().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
             film.setGenres(filmDTO.getGenres().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
+            film.setProducers(filmDTO.getProducers().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
+            film.setSoundtrack(Converter.convertToEntity(filmDTO.getSoundtrack()));
             return Converter.convertToDTO(filmRepository.save(film));
         });
     }

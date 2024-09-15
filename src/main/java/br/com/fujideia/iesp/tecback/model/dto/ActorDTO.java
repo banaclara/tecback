@@ -12,5 +12,4 @@ import java.util.List;
 public class ActorDTO {
     private Long id;
     private String name;
-    private List<FilmDTO> films;
 }

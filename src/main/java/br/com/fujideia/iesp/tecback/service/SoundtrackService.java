@@ -54,7 +54,6 @@ public class SoundtrackService {
         return soundtrackRepository.findById(id).map(soundtrack -> {
             soundtrack.setComposer(soundtrackDTO.getComposer());
             soundtrack.setTracks(soundtrackDTO.getTracks().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
-            soundtrack.setFilm(Converter.convertToEntity(soundtrackDTO.getFilm()));
             return Converter.convertToDTO(soundtrackRepository.save(soundtrack));
         });
     }

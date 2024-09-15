@@ -14,5 +14,4 @@ import java.util.List;
 public class DirectorDTO {
     private Long id;
     private String name;
-    private List<FilmDTO> filmsDirected;
 }

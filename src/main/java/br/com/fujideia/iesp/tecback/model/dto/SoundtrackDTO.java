@@ -13,6 +13,5 @@ public class SoundtrackDTO {
     private Long id;
     private String composer;
     private List<TrackDTO> tracks;
-    private FilmDTO film;
     private String totalDuration;
 }

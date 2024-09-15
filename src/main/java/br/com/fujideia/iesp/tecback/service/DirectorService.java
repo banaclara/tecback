@@ -36,7 +36,6 @@ public class DirectorService {
     public Optional<DirectorDTO> updateDirector(Long id, DirectorDTO directorDTO) {
         return directorRepository.findById(id).map(director -> {
             director.setName(directorDTO.getName());
-            director.setFilmsDirected(directorDTO.getFilmsDirected().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
             return Converter.convertToDTO(directorRepository.save(director));
         });
     }

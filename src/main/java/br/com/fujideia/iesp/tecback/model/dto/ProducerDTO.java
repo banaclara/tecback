@@ -14,5 +14,4 @@ public class ProducerDTO {
     private String name;
     private int age;
     private String nationality;
-    private List<FilmDTO> producedFilms;
 }

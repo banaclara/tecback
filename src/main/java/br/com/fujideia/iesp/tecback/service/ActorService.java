@@ -35,7 +35,6 @@ public class ActorService {
     public Optional<ActorDTO> updateActor(Long id, ActorDTO actorDTO) {
         return actorRepository.findById(id).map(actor -> {
             actor.setName(actorDTO.getName());
-            actor.setFilms(actorDTO.getFilms().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
             return Converter.convertToDTO(actorRepository.save(actor));
         });
     }

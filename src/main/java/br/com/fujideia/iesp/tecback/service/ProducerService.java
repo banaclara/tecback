@@ -71,7 +71,6 @@ public class ProducerService {
             producer.setName(producerDTO.getName());
             producer.setAge(producerDTO.getAge());
             producer.setNationality(producerDTO.getNationality());
-            producer.setProducedFilms(producerDTO.getProducedFilms().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
             return Converter.convertToDTO(producerRepository.save(producer));
         });
     }
