@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface ProducerRepository extends JpaRepository<Producer, Long> {
 
-    @Query("SELECT f FROM Producer f WHERE f.name LIKE %:name%")
+    @Query("SELECT p FROM Producer p WHERE p.name LIKE %:name%")
     List<Producer> findByName(@Param("name") String name);
 }

@@ -50,7 +50,7 @@ public class ProducerController {
     @PostMapping("/{id}/films/{filmId}")
     public ResponseEntity<ProducerDTO> addFilmToProducer(@PathVariable Long id, @PathVariable Long filmId) {
         log.info("Calling addFilmToProducer on ProducerController with producer_id: {} and film_id: {}", id, filmId);
-        ProducerDTO updatedProducer = producerService.addFilm(id, filmId);
+        ProducerDTO updatedProducer = producerService.addFilmToProducer(id, filmId);
         return ResponseEntity.ok(updatedProducer);
     }
 

@@ -4,18 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FilmDTO {
+public class TrackDTO {
     private Long id;
     private String title;
-    private int releaseYear;
-    private DirectorDTO director;
-    private List<ActorDTO> actors;
-    private List<GenreDTO> genres;
-    private List<ProducerDTO> producers;
+    private int duration;
     private SoundtrackDTO soundtrack;
 }

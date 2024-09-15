@@ -53,7 +53,7 @@ public class ProducerService {
         return Converter.convertToDTO(producerRepository.save(producer));
     }
 
-    public ProducerDTO addFilm(Long producerId, Long filmId) {
+    public ProducerDTO addFilmToProducer(Long producerId, Long filmId) {
         Producer producer = producerRepository.findById(producerId)
                 .orElseThrow(() -> new RuntimeException("Producer not found"));
         Film film = filmRepository.findById(filmId)

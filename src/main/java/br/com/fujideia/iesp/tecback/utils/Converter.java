@@ -21,7 +21,8 @@ public class Converter {
                         .collect(Collectors.toList()),
                 film.getProducers().stream()
                         .map(Converter::convertToDTO)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toList()),
+                film.getSoundtrack() != null ? convertToDTO(film.getSoundtrack()) : null
         );
     }
 
@@ -67,6 +68,27 @@ public class Converter {
         );
     }
 
+    public static SoundtrackDTO convertToDTO(Soundtrack soundtrack) {
+        return new SoundtrackDTO(
+                soundtrack.getId(),
+                soundtrack.getComposer(),
+                soundtrack.getTracks() != null ? soundtrack.getTracks().stream()
+                        .map(Converter::convertToDTO)
+                        .collect(Collectors.toList()) : null,
+                soundtrack.getFilm() != null ? convertToDTO(soundtrack.getFilm()) : null,
+                soundtrack.totalDuration()
+        );
+    }
+
+    public static TrackDTO convertToDTO(Track track) {
+        return new TrackDTO(
+                track.getId(),
+                track.getTitle(),
+                track.getDuration(),
+                track.getSoundtrack() != null ? convertToDTO(track.getSoundtrack()) : null
+        );
+    }
+
     public static Film convertToEntity(FilmDTO filmDTO) {
         Film film = new Film();
         film.setTitle(filmDTO.getTitle());
@@ -109,5 +131,23 @@ public class Converter {
         producer.setAge(producerDTO.getAge());
         producer.setNationality(producerDTO.getNationality());
         return producer;
+    }
+
+    public static Soundtrack convertToEntity(SoundtrackDTO soundtrackDTO) {
+        Soundtrack soundtrack = new Soundtrack();
+        soundtrack.setId(soundtrackDTO.getId());
+        soundtrack.setComposer(soundtrackDTO.getComposer());
+        soundtrack.setTracks(soundtrackDTO.getTracks().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
+        soundtrack.setFilm(convertToEntity(soundtrackDTO.getFilm()));
+        return soundtrack;
+    }
+
+    public static Track convertToEntity(TrackDTO trackDTO) {
+        Track track = new Track();
+        track.setId(trackDTO.getId());
+        track.setTitle(trackDTO.getTitle());
+        track.setDuration(trackDTO.getDuration());
+        track.setSoundtrack(convertToEntity(trackDTO.getSoundtrack()));
+        return track;
     }
 }

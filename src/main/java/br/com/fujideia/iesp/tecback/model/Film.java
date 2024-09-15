@@ -45,4 +45,8 @@ public class Film {
             inverseJoinColumns = @JoinColumn(name = "producer_id")
     )
     private List<Producer> producers;
+
+    @OneToOne
+    @JoinColumn(name = "soundtrack_id")
+    private Soundtrack soundtrack;
 }
