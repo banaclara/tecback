@@ -27,13 +27,13 @@ public class SoundtrackController {
     }
 
     @PostMapping("/{id}/tracks")
-    public ResponseEntity<Void> addTrackToSoundtrack(@PathVariable Long soundtrackId, @RequestBody TrackDTO trackDTO) {
-        log.info("Calling addTrackToSoundtrack on SoundtrackController with soundtrack_id: {} and data: {}", soundtrackId, trackDTO);
-        soundtrackService.addTrackToSoundtrack(soundtrackId, trackDTO);
+    public ResponseEntity<Void> addTrackToSoundtrack(@PathVariable Long id, @RequestBody TrackDTO trackDTO) {
+        log.info("Calling addTrackToSoundtrack on SoundtrackController with soundtrack_id: {} and data: {}", id, trackDTO);
+        soundtrackService.addTrackToSoundtrack(id, trackDTO);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}/tracks/{trackId}")
+    @DeleteMapping("/{soundtrackId}/tracks/{trackId}")
     public ResponseEntity<Void> removeTrackFromSoundtrack(@PathVariable Long soundtrackId, @PathVariable Long trackId) {
         log.info("Calling removeTrackFromSoundtrack on SoundtrackController with soundtrack_id: {} and track_id: {}", soundtrackId, trackId);
         soundtrackService.removeTrackFromSoundtrack(soundtrackId, trackId);

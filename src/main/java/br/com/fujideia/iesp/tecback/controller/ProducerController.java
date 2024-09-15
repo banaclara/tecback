@@ -40,17 +40,17 @@ public class ProducerController {
         return ResponseEntity.ok(producers);
     }
 
-    @GetMapping("/{id}/films")
+    @GetMapping("/{producerId}/films")
     public ResponseEntity<List<FilmDTO>> listFilmsByProducer(@PathVariable Long producerId) {
         log.info("Calling listFilmsByProducer on ProducerController with id: {}", producerId);
         List<FilmDTO> films = producerService.listFilmsProduced(producerId);
         return ResponseEntity.ok(films);
     }
     
-    @PostMapping("/{id}/films/{filmId}")
-    public ResponseEntity<ProducerDTO> addFilmToProducer(@PathVariable Long id, @PathVariable Long filmId) {
-        log.info("Calling addFilmToProducer on ProducerController with producer_id: {} and film_id: {}", id, filmId);
-        ProducerDTO updatedProducer = producerService.addFilmToProducer(id, filmId);
+    @PostMapping("/{producerId}/films/{filmId}")
+    public ResponseEntity<ProducerDTO> addFilmToProducer(@PathVariable Long producerId, @PathVariable Long filmId) {
+        log.info("Calling addFilmToProducer on ProducerController with producer_id: {} and film_id: {}", producerId, filmId);
+        ProducerDTO updatedProducer = producerService.addFilmToProducer(producerId, filmId);
         return ResponseEntity.ok(updatedProducer);
     }
 
