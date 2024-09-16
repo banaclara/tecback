@@ -12,6 +12,7 @@ import java.util.List;
 public class SoundtrackDTO {
     private Long id;
     private String composer;
+    private FilmDTO film;
     private List<TrackDTO> tracks;
     private String totalDuration;
 }

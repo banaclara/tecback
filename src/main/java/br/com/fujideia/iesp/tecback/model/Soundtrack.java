@@ -19,9 +19,10 @@ public class Soundtrack {
     private String composer;
 
     @OneToMany(mappedBy = "soundtrack")
-    private List<Track> tracks = new ArrayList<>();
+    private List<Track> tracks;
 
-    @OneToOne(mappedBy = "soundtrack")
+    @OneToOne
+    @JoinColumn(name = "film_id")
     private Film film;
 
     @Transient

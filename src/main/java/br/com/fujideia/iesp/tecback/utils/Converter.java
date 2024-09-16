@@ -4,6 +4,7 @@ import br.com.fujideia.iesp.tecback.model.*;
 import br.com.fujideia.iesp.tecback.model.dto.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class Converter {
@@ -14,15 +15,18 @@ public class Converter {
                 film.getTitle(),
                 film.getReleaseYear(),
                 film.getDirector() != null ? convertToDTO(film.getDirector()) : null,
-                film.getActors().stream()
-                        .map(Converter::convertToDTO)
-                        .collect(Collectors.toList()),
-                film.getGenres().stream()
-                        .map(Converter::convertToDTO)
-                        .collect(Collectors.toList()),
-                film.getProducers().stream()
-                        .map(Converter::convertToDTO)
-                        .collect(Collectors.toList()),
+                film.getActors() != null ?
+                        film.getActors().stream()
+                                .map(Converter::convertToDTO)
+                                .collect(Collectors.toList()) : Collections.emptyList(),
+                film.getGenres() != null ?
+                        film.getGenres().stream()
+                                .map(Converter::convertToDTO)
+                                .collect(Collectors.toList()) : Collections.emptyList(),
+                film.getProducers() != null ?
+                        film.getProducers().stream()
+                                .map(Converter::convertToDTO)
+                                .collect(Collectors.toList()) : Collections.emptyList(),
                 film.getSoundtrack() != null ? convertToDTO(film.getSoundtrack()) : null
         );
     }
@@ -61,9 +65,11 @@ public class Converter {
         return new SoundtrackDTO(
                 soundtrack.getId(),
                 soundtrack.getComposer(),
-                soundtrack.getTracks() != null ? soundtrack.getTracks().stream()
-                        .map(Converter::convertToDTO)
-                        .collect(Collectors.toList()) : null,
+                soundtrack.getFilm() != null ? convertToDTO(soundtrack.getFilm()) : null,
+                soundtrack.getTracks() != null ?
+                        soundtrack.getTracks().stream()
+                                .map(Converter::convertToDTO)
+                                .collect(Collectors.toList()) : Collections.emptyList(),
                 soundtrack.totalDuration()
         );
     }
@@ -80,10 +86,17 @@ public class Converter {
         Film film = new Film();
         film.setTitle(filmDTO.getTitle());
         film.setReleaseYear(filmDTO.getReleaseYear());
-        film.setDirector(convertToEntity(filmDTO.getDirector()));
-        film.setActors(filmDTO.getActors().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
-        film.setGenres(filmDTO.getGenres().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
-        film.setProducers(filmDTO.getProducers().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
+        film.setDirector(filmDTO.getDirector() != null ? convertToEntity(filmDTO.getDirector()) : null);
+        film.setActors(filmDTO.getActors() != null ?
+                filmDTO.getActors().stream().map(Converter::convertToEntity).collect(Collectors.toList()) :
+                new ArrayList<>());
+        film.setGenres(filmDTO.getGenres() != null ?
+                filmDTO.getGenres().stream().map(Converter::convertToEntity).collect(Collectors.toList()) :
+                new ArrayList<>());
+        film.setProducers(filmDTO.getProducers() != null ?
+                filmDTO.getProducers().stream().map(Converter::convertToEntity).collect(Collectors.toList()) :
+                new ArrayList<>());
+        film.setSoundtrack(filmDTO.getSoundtrack() != null ? convertToEntity(filmDTO.getSoundtrack()) : null);
         return film;
     }
 
@@ -124,13 +137,10 @@ public class Converter {
         Soundtrack soundtrack = new Soundtrack();
         soundtrack.setId(soundtrackDTO.getId());
         soundtrack.setComposer(soundtrackDTO.getComposer());
-        if (soundtrackDTO.getTracks() != null) {
-            soundtrack.setTracks(soundtrackDTO.getTracks().stream()
-                    .map(Converter::convertToEntity)
-                    .collect(Collectors.toList()));
-        } else {
-            soundtrack.setTracks(new ArrayList<>());
-        }
+        soundtrack.setFilm(soundtrackDTO.getFilm() != null ? convertToEntity(soundtrackDTO.getFilm()) : null);
+        soundtrack.setTracks(soundtrackDTO.getTracks() != null ?
+                soundtrackDTO.getTracks().stream().map(Converter::convertToEntity).collect(Collectors.toList()) :
+                new ArrayList<>());
         return soundtrack;
     }
 

@@ -46,7 +46,6 @@ public class Film {
     )
     private List<Producer> producers;
 
-    @OneToOne
-    @JoinColumn(name = "soundtrack_id")
+    @OneToOne(mappedBy = "film")
     private Soundtrack soundtrack;
 }

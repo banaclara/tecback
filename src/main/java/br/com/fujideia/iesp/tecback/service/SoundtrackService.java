@@ -59,7 +59,7 @@ public class SoundtrackService {
     public Optional<SoundtrackDTO> updateSoundtrack(Long id, SoundtrackDTO soundtrackDTO) {
         return soundtrackRepository.findById(id).map(soundtrack -> {
             soundtrack.setComposer(soundtrackDTO.getComposer());
-            soundtrack.setTracks(soundtrackDTO.getTracks().stream().map(Converter::convertToEntity).collect(Collectors.toList()));
+            if (soundtrackDTO.getTracks() != null) { soundtrack.setTracks(soundtrackDTO.getTracks().stream().map(Converter::convertToEntity).collect(Collectors.toList())); }
             return Converter.convertToDTO(soundtrackRepository.save(soundtrack));
         });
     }
