@@ -82,6 +82,16 @@ public class Converter {
         );
     }
 
+    public static ReviewDTO convertToDTO(Review review) {
+        return new ReviewDTO(
+                review.getId(),
+                review.getAuthor(),
+                review.getRating(),
+                review.getComment(),
+                convertToDTO(review.getFilm())
+        );
+    }
+
     public static Film convertToEntity(FilmDTO filmDTO) {
         Film film = new Film();
         film.setTitle(filmDTO.getTitle());
@@ -150,5 +160,14 @@ public class Converter {
         track.setTitle(trackDTO.getTitle());
         track.setDuration(trackDTO.getDuration());
         return track;
+    }
+
+    public static Review convertToEntity(ReviewDTO reviewDTO, Film film) {
+        Review review = new Review();
+        review.setAuthor(reviewDTO.getAuthor());
+        review.setRating(reviewDTO.getRating());
+        review.setComment(reviewDTO.getComment());
+        review.setFilm(film != null ? film : null);
+        return review;
     }
 }
