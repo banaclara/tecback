@@ -92,6 +92,16 @@ public class Converter {
         );
     }
 
+    public static AwardDTO convertToDTO(Award award) {
+        return new AwardDTO(
+                award.getId(),
+                award.getName(),
+                award.getYear(),
+                award.getCategory(),
+                award.getWinner()
+        );
+    }
+
     public static Film convertToEntity(FilmDTO filmDTO) {
         Film film = new Film();
         film.setTitle(filmDTO.getTitle());
@@ -169,5 +179,14 @@ public class Converter {
         review.setComment(reviewDTO.getComment());
         review.setFilm(film != null ? film : null);
         return review;
+    }
+
+    public static Award convertToEntity(AwardDTO awardDTO) {
+        Award award = new Award();
+        award.setName(awardDTO.getName());
+        award.setYear(awardDTO.getYear());
+        award.setCategory(awardDTO.getCategory());
+        award.setWinner(awardDTO.getWinner());
+        return award;
     }
 }

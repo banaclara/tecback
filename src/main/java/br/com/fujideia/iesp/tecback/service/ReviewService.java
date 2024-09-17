@@ -34,7 +34,7 @@ public class ReviewService {
     public double calculateRating(Long filmId) {
         List<ReviewDTO> reviews = reviewRepository.findByFilm(filmId).stream()
                 .map(Converter::convertToDTO)
-                .collect(Collectors.toList());
+                .toList();
         return reviews.stream()
                 .mapToInt(ReviewDTO::getRating)
                 .average()
