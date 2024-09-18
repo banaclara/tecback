@@ -16,7 +16,7 @@ public class Producer {
 
     private String name;
 
-    private int age;
+    private Integer age;
 
     private String nationality;
 

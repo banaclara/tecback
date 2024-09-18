@@ -13,7 +13,15 @@ public class Award {
     private Long id;
 
     private String name;
-    private Integer year;
+
+    private Integer awardYear;
+
+    @Enumerated(EnumType.STRING)
     private AwardCategory category;
+
     private String winner;
+
+    @OneToOne
+    @JoinColumn(name = "film_id")
+    private Film film;
 }

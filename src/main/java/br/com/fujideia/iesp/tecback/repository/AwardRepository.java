@@ -12,9 +12,9 @@ import java.util.List;
 
 @Repository
 public interface AwardRepository extends JpaRepository<Award, Long> {
-    @Query("SELECT a.name, a.category FROM Award a WHERE a.year = :year")
-    List<Award> findWinnersByYear(@Param("year") Integer year);
+    @Query("SELECT a.name, a.category FROM Award a WHERE a.awardYear = :awardYear")
+    List<Award> findWinnersByYear(@Param("awardYear") Integer awardYear);
 
-    @Query("SELECT a FROM Award a WHERE a.category = :category AND a.winner = :filmTitle")
-    List<Award> findAwardsWonByFilm(@Param("category") AwardCategory category, @Param("filmTitle") String filmTitle);
+    @Query("SELECT a FROM Award a WHERE a.winner = :filmTitle")
+    List<Award> findAwardsWonByFilm(@Param("filmTitle") String filmTitle);
 }

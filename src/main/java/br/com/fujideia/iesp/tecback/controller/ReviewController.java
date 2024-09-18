@@ -32,13 +32,13 @@ public class ReviewController {
     }
 
     @GetMapping("/{filmId}/rating")
-    public String calculateFilmAverageRating(@PathVariable Long filmId) {
+    public ResponseEntity<String> calculateFilmAverageRating(@PathVariable Long filmId) {
         log.info("Calling calculateFilmAverageRating on ReviewController with film id: {}", filmId);
         double averageRating = reviewService.calculateRating(filmId);
         if (Double.isNaN(averageRating)) {
-            return "No reviews were found for this film.";
+            return ResponseEntity.notFound().build();
         } else {
-            return String.format("Average rating: %.2f", averageRating);
+            return ResponseEntity.ok(String.format("Average rating: %.2f", averageRating));
         }
     }
 

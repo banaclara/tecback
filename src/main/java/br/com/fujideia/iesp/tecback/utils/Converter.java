@@ -96,9 +96,10 @@ public class Converter {
         return new AwardDTO(
                 award.getId(),
                 award.getName(),
-                award.getYear(),
+                award.getAwardYear(),
                 award.getCategory(),
-                award.getWinner()
+                award.getWinner(),
+                convertToDTO(award.getFilm())
         );
     }
 
@@ -177,16 +178,17 @@ public class Converter {
         review.setAuthor(reviewDTO.getAuthor());
         review.setRating(reviewDTO.getRating());
         review.setComment(reviewDTO.getComment());
-        review.setFilm(film != null ? film : null);
+        review.setFilm(film);
         return review;
     }
 
     public static Award convertToEntity(AwardDTO awardDTO) {
         Award award = new Award();
         award.setName(awardDTO.getName());
-        award.setYear(awardDTO.getYear());
+        award.setAwardYear(awardDTO.getAwardYear());
         award.setCategory(awardDTO.getCategory());
         award.setWinner(awardDTO.getWinner());
+        award.setFilm(convertToEntity(awardDTO.getFilm()));
         return award;
     }
 }

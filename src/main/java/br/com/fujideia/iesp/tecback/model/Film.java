@@ -16,7 +16,7 @@ public class Film {
     private Long id;
 
     private String title;
-    private int releaseYear;
+    private Integer releaseYear;
 
     @ManyToOne
     @JoinColumn(name = "director_id")

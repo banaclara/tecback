@@ -14,7 +14,8 @@ public class Track {
     private Long id;
 
     private String title;
-    private int duration;
+
+    private Integer duration;
 
     @ManyToOne
     @JoinColumn(name = "soundtrack_id")

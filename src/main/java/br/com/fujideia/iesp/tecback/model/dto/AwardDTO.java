@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 public class AwardDTO {
     private Long id;
     private String name;
-    private int year;
+    private Integer awardYear;
     private AwardCategory category;
     private String winner;
+    private FilmDTO film;
 }
