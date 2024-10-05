@@ -1,65 +1,99 @@
-# Pós graduação em desenvolvimento web
-Código base da disciplina de fundamentos de programação web para disciplinas de pós graduação.
-Contém conteúdo básico com fundamentos de programação Java web utilizando REST com Maven, JDK11, JDK 17 , SpringBoot , SpringData
+# Projeto API Rest
 
-[![License](https://img.shields.io/github/license/rodrigofujioka/tecback.svg)](https://opensource.org/licenses/MIT)
-<img src="https://img.shields.io/github/followers/rodrigofujioka?label=Follow&style=plastic">
-<img src="https://img.shields.io/github/forks/rodrigofujioka/tecback?color=SSSS&label=Fork&style=plastic">
-<a href="https://github.com/rodrigofujioka/tecback/graphs/contributors" alt="Contributors">
-<img src="https://img.shields.io/github/contributors/rodrigofujioka/tecback" /></a>
-<a href="https://github.com/rodrigofujioka/tecback/pulse" alt="Activity">
-<img src="https://img.shields.io/github/commit-activity/m/rodrigofujioka/tecback" /></a>
+## Detalhamento do Time
 
+Este projeto foi desenvolvido individualmente por **Ana Clara Barros**, que implementou todos os endpoints, services, repositories, models (anotados com @Entity) e DTOs da aplicação.
 
-Olá, seja bem vindo a mais um curso com o professor Rodrigo Fujioka.
+## Detalhamento dos endpoints:
 
-* Meu instagram: [@rodrigofujioka](https://www.instagram.com/rodrigofujioka)
-* Meu facebook: [@rodrigofujioka](https://www.facebook.com/rodrigofujioka)
+### *Film*:
 
+CRUD completo
 
-- [Intellij Idea](https://www.jetbrains.com/idea/)
-- [Spring Tools](https://spring.io/tools)
-- [JDK](https://jdk.java.net/java-se-ri/17)
+    - GET /films
+    - GET /films/{id}
+    - POST /films
+    - PUT /films/{id}
+    - DELETE /films/{id}
 
-- ```Outras ferramentas como NetBeans ou VS Code podem ser utilizadas)```
+### *Director*:
 
-## Cursos recomendados
+CRUD completo
 
-Cursos recomendados para alunos com dificuldade em assimilar o conteúdo.
+    - GET /directors
+    - GET /directors/{id}
+    - POST /directors
+    - PUT /directos/{id}
+    - DELETE /directors/{id}
 
-#### GIT
-- [GIT para iniciantes](https://www.udemy.com/git-e-github-para-iniciantes/)
-- [GIT - DevMedia](https://www.devmedia.com.br/guia/git-e-github/37585)
+### *Genre*:
 
-#### Java
-- [DevMedia - Java](https://www.devmedia.com.br/guia/programador-java/37809)
-- [Loiane - Java](https://loiane.training/curso/java-basico)
+CRUD completo
 
+    - GET /genres
+    - GET /genres/{id}
+    - POST /genres
+    - PUT /genres/{id}
+    - DELETE /genres/{id}
 
-## Preparação do ambiente
+### *Actor*:
 
+CRUD completo
 
-1 - Configurar o ambiente Java, na ordem informada.
+    - GET /actors
+    - GET /actors/{id}
+    - POST /actors
+    - PUT /actors/{id}
+    - DELETE /actors/{id}
 
-1.1 - Baixar e instalar o JDK  ->
-[Oracle JDK](https://www.oracle.com/technetwork/pt/java/javase/downloads/index.html)
-[Open JDK](https://openjdk.java.net/install/index.html)
+### *Producer*:
 
-1.2 - Baixar e extrair binarios do Maven ->
-[Maven](https://maven.apache.org/download.cgi)
+CRUD completo
 
-1.3 - Configurar Classpath (Java e Maven) ->
+    - GET /producers
+    - GET /producers/{id}
+    - POST /producers
+    - PUT /producers/{id}
+    - DELETE /producers/{id}
 
-1.4 - Baixar e instalar ferramentas de desenvolvimento.
+Outros endpoints
 
-1.4.1 - Aulas ministradas com [Intellij Idea](https://www.jetbrains.com/idea/) Idea ou [Spring Tools](https://spring.io/tools)  .
+- `GET /producers/{producerId}/films` - para listar todos os filmes produzidos por um produtor específico
+- `POST /producers/{producerId}/films/{filmId}` - para relacionar um produtor já registrado no banco a um filme
 
-1.4.2 - Pode ser utilizada qualquer outra ferramenta, no entanto, dúvidas sobre
-utilização apenas sobre as IDE's do itens #1.4.1
+### *Soundtrack*:
 
-1.5 - Criar conta no github
+Rotas de criação, update e delete
 
-1.5.1 - Realizar fork do meu github [Java básico](https://github.com/rodrigofujioka/tecback) , recomendo me seguir lá.
+    - POST /soundtracks
+    - PUT /soundtracks/{id}
+    - DELETE /soundtracks/{id}
 
-1.5.2 - Instruções para o projeto são informadas em sala de aula, deve existir outro arquivo .MD com as
-instruções descritivas para sua turma. 
+Outros endpoints
+
+- `GET /soundtracks/search` - pesquisar a trilha sonora pelo nome do compositor
+- `POST /soundtracks/{id}/tracks` - adiciona faixas a uma trilha sonora específica
+- `DELETE /soundtracks/{soundtrackId}/tracks/{trackId}` - exclui uma faixa específica de uma trilha sonora
+
+### *Review*:
+
+Rotas de criação e delete
+
+    - POST /reviews
+    - DELETE /reviews/{id}
+
+Outros endpoints
+
+- `GET /reviews/{filmId}` - exibe todas as críticas de um filme específico
+- `GET /reviews/{filmId}/rating` - calcula a média de notas recebidas nas críticas de um filme
+
+### *Award*:
+
+Criação
+
+    - POST /awards
+
+Outros endpoints
+
+- `GET /awards/{filmId}` - exibe todos os prêmios que um filme recebeu
+- `GET /awards/search` - pesquisar por todos os prêmios e seus ganhadores de um ano específico
