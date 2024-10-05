@@ -12,16 +12,16 @@ public class Award {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
     private Integer awardYear;
 
     @Enumerated(EnumType.STRING)
     private AwardCategory category;
 
+    private String name;
+
     private String winner;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "film_id")
     private Film film;
 }

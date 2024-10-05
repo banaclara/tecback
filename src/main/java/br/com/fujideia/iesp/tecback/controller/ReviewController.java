@@ -17,10 +17,10 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
-    @PostMapping("/{filmId}")
-    public ResponseEntity<ReviewDTO> reviewFilm(@RequestBody ReviewDTO reviewDTO, @PathVariable Long filmId) {
+    @PostMapping
+    public ResponseEntity<ReviewDTO> reviewFilm(@RequestBody ReviewDTO reviewDTO) {
         log.info("Calling reviewFilm on ReviewController with data: {}", reviewDTO);
-        ReviewDTO createdReview = reviewService.reviewFilm(reviewDTO, filmId);
+        ReviewDTO createdReview = reviewService.reviewFilm(reviewDTO);
         return ResponseEntity.ok(createdReview);
     }
 

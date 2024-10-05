@@ -95,9 +95,9 @@ public class Converter {
     public static AwardDTO convertToDTO(Award award) {
         return new AwardDTO(
                 award.getId(),
-                award.getName(),
                 award.getAwardYear(),
                 award.getCategory(),
+                award.getName(),
                 award.getWinner(),
                 convertToDTO(award.getFilm())
         );
@@ -173,20 +173,21 @@ public class Converter {
         return track;
     }
 
-    public static Review convertToEntity(ReviewDTO reviewDTO, Film film) {
+    public static Review convertToEntity(ReviewDTO reviewDTO) {
         Review review = new Review();
         review.setAuthor(reviewDTO.getAuthor());
         review.setRating(reviewDTO.getRating());
         review.setComment(reviewDTO.getComment());
-        review.setFilm(film);
+        review.setFilm(convertToEntity(reviewDTO.getFilm()));
         return review;
     }
 
     public static Award convertToEntity(AwardDTO awardDTO) {
         Award award = new Award();
-        award.setName(awardDTO.getName());
+        award.setId(awardDTO.getId());
         award.setAwardYear(awardDTO.getAwardYear());
         award.setCategory(awardDTO.getCategory());
+        award.setName(awardDTO.getName());
         award.setWinner(awardDTO.getWinner());
         award.setFilm(convertToEntity(awardDTO.getFilm()));
         return award;

@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AwardDTO {
     private Long id;
-    private String name;
     private Integer awardYear;
     private AwardCategory category;
+    private String name;
     private String winner;
     private FilmDTO film;
 }

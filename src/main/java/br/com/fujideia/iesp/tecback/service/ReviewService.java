@@ -6,6 +6,7 @@ import br.com.fujideia.iesp.tecback.model.dto.ReviewDTO;
 import br.com.fujideia.iesp.tecback.repository.FilmRepository;
 import br.com.fujideia.iesp.tecback.repository.ReviewRepository;
 import br.com.fujideia.iesp.tecback.utils.Converter;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,11 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final FilmRepository filmRepository;
 
-    public ReviewDTO reviewFilm(ReviewDTO reviewDTO, Long filmId) {
-        Film film = filmRepository.findById(filmId)
-                .orElseThrow(() -> new IllegalArgumentException("Film with id " + filmId + " not found"));
-        Review review = Converter.convertToEntity(reviewDTO, film);
+    public ReviewDTO reviewFilm(ReviewDTO reviewDTO) {
+        Review review = Converter.convertToEntity(reviewDTO);
+        Film film = filmRepository.findById(reviewDTO.getFilm().getId())
+                .orElseThrow(() -> new EntityNotFoundException("Film not found"));
+        review.setFilm(film);
         return Converter.convertToDTO(reviewRepository.save(review));
     }
 

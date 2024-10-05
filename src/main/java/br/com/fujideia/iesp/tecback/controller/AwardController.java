@@ -28,4 +28,10 @@ public class AwardController {
         List<AwardDTO> winners = awardService.winnersOfTheYear(year);
         return ResponseEntity.ok(winners);
     }
+
+    @GetMapping("/{filmId}")
+    public ResponseEntity<List<AwardDTO>> awardsWonByFilm(@PathVariable Long filmId) {
+        List<AwardDTO> awards = awardService.listAwardsWonByFilm(filmId);
+        return ResponseEntity.ok(awards);
+    }
 }
